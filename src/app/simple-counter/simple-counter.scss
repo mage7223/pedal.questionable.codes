@@ -1,0 +1,36 @@
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .h2-container { 
+            width: 100%;
+            align-content: center;
+            display: flex;
+            flex-wrap: unset;
+            align-items: center;
+        }
+        .h2-title-container {
+            text-align: center;
+            font-size: 48px;
+        }
+        .find-image {
+            margin-left: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            height: 24px;
+        }
+        .count-display {
+            font-size: 196px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .error-container {
+            font-size: xx-large;
+            font-weight: bold;
+            text-align: center;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
