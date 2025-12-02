@@ -3,11 +3,11 @@ name: S3 Deploy
 on:
   push:
     branches:
-      - dev
+      - main
 
 env:
   AWS_REGION: us-east-1
-  BUILD_CONFIG: dev
+  BUILD_CONFIG: prod
 
 jobs:
   angular:
