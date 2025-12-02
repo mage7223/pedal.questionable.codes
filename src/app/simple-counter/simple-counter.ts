@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 
 @Component({
   selector: 'app-simple-counter',
@@ -16,7 +16,7 @@ export class SimpleCounter implements OnInit{
   serviceUUID = "d98e357f-3d21-4669-a17d-9b389d6559e1";
   buttonDownCharacteristicUUID = "4e9ca473-b618-4de5-a0db-bb1c055a5e1c";
   buttonUpCharacteristicUUID = "019f2af2-6401-445b-a52d-8119aca2c5ef";
-  clickCount = 0;
+  clickCount = signal(0);
 
 
   ngOnInit(): void {
@@ -108,16 +108,16 @@ export class SimpleCounter implements OnInit{
 
   private leftButtonClicked() {
     console.log('Left button clicked');
-    if(this.clickCount > 0){
-        this.clickCount -= 1;
+    if(this.clickCount() > 0){
+        this.clickCount.set(this.clickCount() - 1);
     }
   };
   private centerButtonClicked() {
     console.log('Center button clicked');
-    this.clickCount +=1;
+    this.clickCount.set(this.clickCount() + 1);
   };
   private rightButtonClicked() {
-    this.clickCount = 0;
+    this.clickCount.set(0);
     console.log('Right button clicked');
   };
 
