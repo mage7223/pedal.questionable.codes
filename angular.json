@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "pedal-quationable-codes": {
+    "pedal-questionable-codes": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "pedal-quationable-codes:build:production"
+              "buildTarget": "pedal-questionable-codes:build:production"
             },
             "development": {
-              "buildTarget": "pedal-quationable-codes:build:development"
+              "buildTarget": "pedal-questionable-codes:build:development"
             }
           },
           "defaultConfiguration": "development"
