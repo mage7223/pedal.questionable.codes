@@ -1,0 +1,10 @@
+    <h2 class="h2-title-container">Simple Counter@if(!errorMessage){<img  id="findDevices" class="find-image" (click)="onConnectClick()" [src]="imagePath">}</h2>
+    @if(errorMessage){
+        <div class="error-container">
+            <div class="error-title-container">Error</div><br/>
+            <div class="error-message">{{errorMessage}}</div><br/>
+            See <a href="https://caniuse.com/web-bluetooth" target="_blank">supported browsers</a>.
+        </div>        
+    } @else {
+        <div id="count" class="count-display">{{clickCount}}</div>
+    }
