@@ -1,4 +1,5 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { StorageService } from '../service/storage';
 
 @Component({
   selector: 'app-simple-counter',
@@ -10,19 +11,32 @@ export class SimpleCounter implements OnInit{
 
   connected = false;
   device: BluetoothDevice | null = null;
-  imagePath = "/pedals/disconnected.png";
-  errorMessage = null as string | null;
+  imagePath = signal("/pedals/disconnected.png");
+  errorMessage = signal<string>("");
+  hasError = signal(false);
 
   serviceUUID = "d98e357f-3d21-4669-a17d-9b389d6559e1";
   buttonDownCharacteristicUUID = "4e9ca473-b618-4de5-a0db-bb1c055a5e1c";
   buttonUpCharacteristicUUID = "019f2af2-6401-445b-a52d-8119aca2c5ef";
-  clickCount = signal(0);
+  storageService = inject(StorageService)
+  clickCount = signal(this.storageService.getItem("clickCount") ?? 0);
+
+  constructor() {
+    effect(() => {
+      this.storageService.setItem("clickCount", this.clickCount());
+    });
+    effect(() => {
+      this.hasError.set(this.errorMessage() !== "");
+    });
+
+  }
 
 
   ngOnInit(): void {
     if(!navigator.bluetooth) {
-      this.errorMessage = 'Web Bluetooth is not supported in this browser.';
+      this.errorMessage.set('Web Bluetooth is not supported in this browser.');
     }
+
   }
 
   public async onConnectClick() {
@@ -35,7 +49,7 @@ export class SimpleCounter implements OnInit{
     if(this.connected) {
         console.log('Disconnecting Bluetooth devices...');
         this.device?.gatt?.disconnect();
-        this.imagePath = "/pedals/disconnected.png";
+        this.imagePath.set("/pedals/disconnected.png");
         this.connected = false;
     } else 
         navigator.bluetooth.requestDevice(
@@ -48,16 +62,16 @@ export class SimpleCounter implements OnInit{
           var buttonUpCharacteristic: any;
           device.addEventListener('gattserverdisconnected', () => {
               console.log('Device disconnected');
-              this.imagePath = "/pedals/disconnected.png";
+              this.imagePath.set("/pedals/disconnected.png");
           });
           device.addEventListener('gattserverconnected', () => {
               console.log('Device connected');
-              this.imagePath = "/pedals/connected.png";
+              this.imagePath.set("/pedals/connected.png");
           });
           device.gatt.connect()
           .then((connectedServer: any) => {
               console.log('Connected to GATT server');
-              this.imagePath = "/pedals/connected.png";
+              this.imagePath.set("/pedals/connected.png");
               return connectedServer.getPrimaryService(this.serviceUUID);
           })
           .then((connectedService: any) => {
@@ -121,5 +135,16 @@ export class SimpleCounter implements OnInit{
     console.log('Right button clicked');
   };
 
+  onClick($event: PointerEvent) {
+    console.log('Header clicked with event:', $event);
+    if($event.ctrlKey || $event.metaKey) {
+      // ctrl click
+      this.centerButtonClicked();
+    }
+    if($event.shiftKey) {
+      // shift click
+      this.leftButtonClicked();
+    }
+  }
 
 }

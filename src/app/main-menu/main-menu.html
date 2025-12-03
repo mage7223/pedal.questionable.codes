@@ -1,4 +1,21 @@
-The following items are used with the Pedal component. Please select the action you wish to perform:
-<ul>
-    <li><a href="simple-counter">Simple Counter</a></li>
-</ul>
+<mat-toolbar>
+    <button matIconButton [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="onNavigateToSimpleCounter()">
+    <mat-icon>view_headline</mat-icon>
+    <span>Simple Counter</span>
+  </button>
+</mat-menu>
+  <span>Pedal Questionable Codes</span>
+  <span class="spacer"></span>
+  <button matIconButton class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  @if(canShare()){
+  <button (click)="onShareLink()" matIconButton class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button>
+}
+</mat-toolbar>
