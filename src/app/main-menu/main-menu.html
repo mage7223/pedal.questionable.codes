@@ -3,15 +3,23 @@
         <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="onNavigateToSimpleCounter()">
-    <mat-icon>view_headline</mat-icon>
-    <span>Simple Counter</span>
-  </button>
-</mat-menu>
+        <button mat-menu-item (click)="onNavigateInstructions()">
+            <mat-icon>home</mat-icon>
+            <span>Instructions</span>
+        </button>
+        <button mat-menu-item (click)="onNavigateToSimpleCounter()">
+            <mat-icon>view_headline</mat-icon>
+            <span>Simple Counter</span>
+        </button>
+    </mat-menu>
   <span>Pedal Questionable Codes</span>
   <span class="spacer"></span>
-  <button matIconButton class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
+  <button (click)="onConnectToPedal()" matIconButton class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    @if(pedalService.connected()){
+        <mat-icon class="connected">bluetooth_connected</mat-icon>
+    } @else { 
+        <mat-icon class="disconnected">bluetooth</mat-icon>
+    }
   </button>
   @if(canShare()){
   <button (click)="onShareLink()" matIconButton class="example-icon" aria-label="Example icon-button with share icon">

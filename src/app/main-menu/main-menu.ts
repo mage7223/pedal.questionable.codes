@@ -4,6 +4,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { Router } from '@angular/router';
+import { PedalService } from '../service/pedal-service';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 })
 export class MainMenu {
   router = inject(Router);
+  pedalService = inject(PedalService);
   canShare = signal(true);
 
   constructor() {
@@ -25,6 +27,14 @@ export class MainMenu {
   onNavigateToSimpleCounter() {
     console.log('Navigating to Simple Counter');
     this.router.navigate(['/simple-counter']);
+  }
+
+  onConnectToPedal() {
+    if(this.pedalService.connected()){
+      this.pedalService.disconnectFromPedal();
+    } else {
+      this.pedalService.connectToPedal();
+    }
   }
 
   onShareLink() {
@@ -39,6 +49,11 @@ export class MainMenu {
     }).catch((error: any) => {
       console.error('Error sharing link:', error);
     });
+  }
+
+  onNavigateInstructions() {
+    console.log('Navigating to Instructions');
+    this.router.navigate(['/instructions']);
   }
 
 }
