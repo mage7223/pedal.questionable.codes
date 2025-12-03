@@ -19,8 +19,8 @@ export class MainMenu {
   canShare = signal(true);
 
   constructor() {
-    if (navigator['share'] != null) {
-      this.canShare.set(true);
+    if (navigator.share === undefined) {
+      this.canShare.set(false);
     }
   }
 
