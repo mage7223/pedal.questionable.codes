@@ -3,10 +3,12 @@
         <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+        @if(false){
         <button mat-menu-item (click)="onNavigateInstructions()">
             <mat-icon>home</mat-icon>
             <span>Instructions</span>
         </button>
+        }
         <button mat-menu-item (click)="onNavigateToSimpleCounter()">
             <mat-icon>view_headline</mat-icon>
             <span>Simple Counter</span>
