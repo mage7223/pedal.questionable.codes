@@ -7,6 +7,10 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'qr',
+        loadComponent: () => import('./qr/qr').then(m => m.Qr)
+    },
+    {
         path: 'instructions',
         loadComponent: () => import('./instructions/instructions').then(m => m.Instructions)
     },

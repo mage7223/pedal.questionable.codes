@@ -56,4 +56,9 @@ export class MainMenu {
     this.router.navigate(['/instructions']);
   }
 
+  onNavigateQr() {
+    console.log('Navigating to QR Code');
+    this.router.navigate(['/qr']);
+  }
+
 }

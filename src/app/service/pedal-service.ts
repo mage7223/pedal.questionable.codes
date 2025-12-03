@@ -115,21 +115,20 @@ export class PedalService {
       } else if(buttonIndex === 2) {
           this.rightButtonReleased();
       }
-
-    console.log('Button up event received for button index:', buttonIndex);
 }
 
-  rightButtonReleased() {
-      this.onRightButtonRelease.emit();
+  private rightButtonReleased() {
+    console.log('Right button released');
+    this.onRightButtonRelease.emit();
   }
-  centerButtonReleased() {
-      this.onCenterButtonRelease.emit();
+  private centerButtonReleased() {
+    console.log('Center button released');
+    this.onCenterButtonRelease.emit();
   }
-  leftButtonReleased() {
-      this.onLeftButtonRelease.emit();
+  private leftButtonReleased() {
+    console.log('Left button released');
+    this.onLeftButtonRelease.emit();
   }
-
-
   private leftButtonClicked() {
     console.log('Left button clicked');
     this.onLeftButtonPress.emit();
