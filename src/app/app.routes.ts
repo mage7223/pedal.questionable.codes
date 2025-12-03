@@ -3,7 +3,16 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
     {
         path: '',
-        loadComponent: () => import('./main-menu/main-menu').then(m => m.MainMenu)
+        redirectTo: '/instructions',
+        pathMatch: 'full'
+    },
+    {
+        path: 'qr',
+        loadComponent: () => import('./qr/qr').then(m => m.Qr)
+    },
+    {
+        path: 'instructions',
+        loadComponent: () => import('./instructions/instructions').then(m => m.Instructions)
     },
     {
         path: 'simple-counter',
